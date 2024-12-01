@@ -1,0 +1,45 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Build directories
+/dist/
+/build/
+/out/
+
+# Vite, Webpack, or other bundler output
+/.parcel-cache/
+/.vite/
+webpack-stats.json
+
+# Local environment
+.env
+.env.local
+.env.*.local
+
+# Editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# macOS system files
+.DS_Store
+
+# Thumbs.db for Windows
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.swp
+
+# Compiled JavaScript/TypeScript
+*.js.map
+*.
