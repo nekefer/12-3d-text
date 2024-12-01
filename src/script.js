@@ -26,6 +26,7 @@ material.matcap = matcapMaterial;
 
 //  font
 const fontLoader = new FontLoader();
+const tab = []
 
 fontLoader.load("/fonts/helvetiker_bold.typeface.json", (font) => {
   const textGeometry = new TextGeometry("Daniel 3kd", {
@@ -46,6 +47,46 @@ fontLoader.load("/fonts/helvetiker_bold.typeface.json", (font) => {
   const text = new THREE.Mesh(textGeometry, material);
 
   scene.add(text);
+  const textBoundingBox = textGeometry.boundingBox;
+  const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 40);
+
+  for (let i = 0; i < 100; i++) {
+    const donut = new THREE.Mesh(donutGeometry, material);
+
+    let positionIsValid = false;
+
+    while (!positionIsValid) {
+      // Generate random position
+      donut.position.x = (Math.random() - 0.5) * 10;
+      donut.position.y = (Math.random() - 0.5) * 10;
+      donut.position.z = (Math.random() - 0.5) * 10;
+
+      // Check if the position is outside the bounding box of the text
+      if (
+        !(
+          donut.position.x > textBoundingBox.min.x - 1 &&
+          donut.position.x < textBoundingBox.max.x + 1 &&
+          donut.position.y > textBoundingBox.min.y - 1 &&
+          donut.position.y < textBoundingBox.max.y + 1 &&
+          donut.position.z > textBoundingBox.min.z - 1 &&
+          donut.position.z < textBoundingBox.max.z + 1
+        )
+      ) {
+        positionIsValid = true;
+      }
+    }
+
+    donut.rotation.x = Math.random() * Math.PI;
+    donut.rotation.y = Math.random() * Math.PI;
+
+    const scale = Math.random();
+    donut.scale.set(scale, scale, scale);
+    tab[i] = donut;
+    scene.add(donut);
+}
+
+
+  
 });
 
 
@@ -54,27 +95,28 @@ fontLoader.load("/fonts/helvetiker_bold.typeface.json", (font) => {
 // console.log(textGeometry)
 // create object randomly
 
-const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 40);
+// const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 40);
 
-const tab = [];
+// const tab = [];
 
-for (let i = 0; i < 100; i++) {
-  const donut = new THREE.Mesh(donutGeometry, material);
+// for (let i = 0; i < 100; i++) {
+//   const donut = new THREE.Mesh(donutGeometry, material);
   
 
-  donut.position.x = (Math.random() - 0.5) * 10;
-  donut.position.y = (Math.random() - 0.5) * 10;
-  donut.position.z = (Math.random() - 0.5) * 10;
-  console.log(donut.position)
+//   donut.position.x = (Math.random() - 0.5) * 10;
+//   donut.position.y = (Math.random() - 0.5) * 10;
+//   donut.position.z = (Math.random() - 0.5) * 10;
+//   console.log(donut.position)
 
-  donut.rotation.x = Math.random() * Math.PI;
-  donut.rotation.y = Math.random() * Math.PI;
+//   donut.rotation.x = Math.random() * Math.PI;
+//   donut.rotation.y = Math.random() * Math.PI;
 
-  const scale = Math.random();
-  donut.scale.set(scale, scale, scale);
-  tab[i] = donut;
-  scene.add(donut);
-}
+//   const scale = Math.random();
+//   donut.scale.set(scale, scale, scale);
+//   tab[i] = donut;
+//   scene.add(donut);
+// }
+
 
 
 
